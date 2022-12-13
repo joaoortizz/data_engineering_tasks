@@ -1,5 +1,4 @@
 -- 3. Find the weekly order count for the city of Geneva for the last 8 weeks, and also the cumulative total.Desired output: [week_start, order_count, cuml_order_count]
-
 WITH weeks AS (
   SELECT 
     w as week_start, 
@@ -11,17 +10,25 @@ WITH weeks AS (
       (now() - '1 day' :: interval):: date, -- until yesterday
       '1 week' :: interval
     ) AS w
+), 
+orders_per_city AS (
+  SELECT 
+    o.date_created, 
+    o.order_id 
+  FROM 
+    orders o 
+    LEFT JOIN city c ON c.city_id = o.city_id 
+  WHERE 
+    c.city_name = 'Geneva'
 ) 
 SELECT 
-  TO_CHAR(w.week_start, 'yyyy-mm-dd')  as week_start, 
+  TO_CHAR(w.week_start, 'yyyy-mm-dd') as week_start, 
   count(o.order_id) as order_count, 
-  sum(count(o.order_id)) OVER (ORDER BY w.week_start) as cuml_order_count
+  sum(count(o.order_id)) OVER (ORDER BY w.week_start) as cuml_order_count 
 FROM 
   weeks w 
-  LEFT JOIN orders o
-  	ON o.date_created BETWEEN w.week_start and w.week_end 
-  LEFT JOIN city c
-  	ON c.city_id = o.city_id 
+  LEFT JOIN orders_per_city o ON o.date_created BETWEEN w.week_start 
+  and w.week_end 
 group by 
   w.week_start 
 order by 
