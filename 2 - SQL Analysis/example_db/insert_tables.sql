@@ -55,7 +55,7 @@ INSERT INTO country (
   country_id, country_name, currency_code
 ) 
 VALUES 
-  (4, 'Switzerland', 'CHF');
+  (4, 'Morocco', 'MAD');
 
 
 -- CITY
@@ -74,10 +74,6 @@ VALUES
 INSERT INTO city (city_id, city_name, country_id) 
 VALUES 
   (4, 'Buenos Aires', 3);
-
-INSERT INTO city (city_id, city_name, country_id) 
-VALUES 
-  (5, 'Geneva', 4);
 
 
 -- ORDERS
@@ -115,24 +111,3 @@ INSERT INTO orders (
 ) 
 VALUES 
   (5, 2, '2022-12-12', 1.4, 3);
-
-INSERT INTO orders (
-  order_id, user_id, date_created, order_value, 
-  city_id
-) 
-VALUES 
-  (6, 3, '2022-11-15', 1, 5);
-  
-INSERT INTO orders (
-  order_id, user_id, date_created, order_value, 
-  city_id
-) 
-VALUES 
-  (7, 3, '2022-10-28', 1, 5);
-
-INSERT INTO orders (
-  order_id, user_id, date_created, order_value, 
-  city_id
-) 
-VALUES 
-  (8, 3, '2022-11-10', 1, 5);
