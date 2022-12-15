@@ -1,7 +1,9 @@
 6 - Assuming that you have a query that runs very slowly, what are the steps that you would perform in order to identify the cause?
 
 Answer:
-    For PostgreSQL, we can use EXPLAIN and EXPLAIN ANALYZE to identify the query plan and understand better what the query really does.
-    Sometimes, the slowly is occurring because of the order of the arguments and this method can help identify.
-    We can also understand if this table has any index that the query is using or not. Case not, we can create a new index.
-    Other way to deal with this problem is partitioning the table. But this strategy has some side effects, so it depends on a deep study of all queries that uses the table.
+To identify the cause of the query that runs very slowly, I would follow this steps:
+1 - Identify the specific query that is running slowly.
+2 - Check the query's execution plan to see which parts of the query are taking the most time to run (In PostgreSQL, using EXPLAIN and EXPLAIN ANALYZE).
+3 - Look for any potential issues with the query, such as missing indexes or inefficient join conditions.
+4 - Check the system's overall performance to see if there are any other factors that could be affecting the query's speed, such as high CPU or memory usage.
+5 - If the query is running on a database server, check the server's performance to see if there are any issues that could be impacting the query's speed. If the query is running on a web server, check the server's performance and look for any potential issues that could be impacting the query's speed, such as high network latency or a large number of concurrent requests.
